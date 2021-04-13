@@ -1,0 +1,46 @@
+{
+    "general":
+    {
+        "404":
+        {
+            "title": "Not found",
+            "subtext_html": "The page you were looking for does not exist"
+        }
+    },
+    "index": {
+        "index_subhead": "Hassle free fitness tracking",
+        "description_subhead": "Information",
+        "list_items": {
+            "item_1": "Companion apps for iOS & Android",
+            "item_2": "Preoders begin shipping this March"
+        },
+        "form": {
+            "submit": "Preorder"
+        }
+    },
+    "cart": {
+        "button": {
+            "filled": "Your cart",
+            "empty":  "Your cart is empty",
+            "close": "close",
+            "back": "back to Fitra"
+        },
+        "form": {
+            "header": "Cart",
+            "description_subhead": "All preorders ship free this March.",
+            "summary": {
+                "empty": "Your cart is empty",
+                "filled": "Order summary"
+            },
+            "lines": {
+                "shipping": "Shipping",
+                "shipping_cost": "Free",
+                "subtotal": "Subtotal"
+            },
+            "contact": {
+                "title": "Any questions?",
+                "email": "support@getfitra.com"
+            }
+        }
+    }
+}

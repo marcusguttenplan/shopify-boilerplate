@@ -1,0 +1,140 @@
+<div id="cart" class="flex">
+    <div class="left">
+
+        <div class="product-image" style="background: url('{{ "cart-hero.jpg" | asset_url }}') center center no-repeat; background-size: cover; height: 100vh; width: 50vw;">
+        </div>
+
+    </div>
+
+    <div class="right">
+      <div class="wrapper">
+        <div class="header">
+          <h1>{{ 'cart.form.header' | t }}</h1>
+          <span class="item-count">{{ cart.item_count }}</span>
+        </div>
+        <div class="btf info">
+            <div class="info-left">
+                {% if cart.item_count > 0 %}
+
+                    <div class="subheader">
+                        <h2>{{ 'cart.form.description_subhead' | t }}</h2>
+                    </div>
+                    <div class="list">
+                        <div class="item">
+                            {{ 'cart.form.contact.title' | t }}<br>
+                            {{ 'cart.form.contact.email' | t }}
+                        </div>
+                    </div>
+
+                {% else %}
+
+
+                {% endif %}
+
+            </div>
+            <div class="info-right">
+                <div class="info-text">
+                    {% if cart.item_count > 0 %}
+                    <p>
+                        {{ 'cart.form.summary.filled' | t }}
+                    </p>
+                    {% else %}
+                    <p>
+                        {{ 'cart.form.summary.empty' | t }}
+                    </p>
+                    {% endif %}
+                </div>
+                <div class="cart-form">
+
+
+                    <form action="/cart" method="post" novalidate>
+                        {% if cart.item_count > 0 %}
+                            {% for item in cart.items %}
+                                <div class="form-line row">
+                                    {% if item.quantity > 1 %} {{ item.quantity }}x {% endif %}  {{ item.product.title }} &ndash; {{ item.variant.title }}
+
+                                    {{ item.line_price | money }}
+
+                                    <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">x</a>
+                                </div>
+                                <div class="form-line row">
+                                    {{ 'cart.form.lines.shipping' | t }}
+                                    {{ 'cart.form.lines.shipping_cost' | t }}
+                                </div>
+                                <div class="form-line row">
+                                    {{ 'cart.form.lines.subtotal' | t }}
+                                    {{ cart.total_price | money }}
+                                </div>
+                                <button type="submit" name="checkout">Checkout</button>
+                            {% endfor %}
+                        {% else %}
+
+                        <div class="form-line row">
+
+                        </div>
+                        <div class="form-line row">
+
+                        </div>
+                        <div class="form-line row">
+
+                        </div>
+
+                        <a href="/" class="back">{{ 'cart.button.back' | t }}</a>
+
+                        {% endif %}
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% if cart.item_count > 0 %}
+  <!-- <h1>cart</h1>
+  <form action="/cart" method="post" novalidate>
+    <table>
+      <thead>
+        <th colspan="2">Prod</th>
+        <th>Price</th>
+        <th>Qty</th>
+        <th>total</th>
+      </thead>
+      <tbody>
+        {% for item in cart.items %}
+          <tr>
+            <td>
+              <a href="{{ item.url | within: collections.all }}">
+                <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+              </a>
+            </td>
+            <td>
+              <a href="{{ item.url }}">{{ item.product.title }}</a>
+              {{ item.variant.title }}
+              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">remove</a>
+            </td>
+            <td>{{ item.price | money }}</td>
+            <td>
+              <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
+            </td>
+            <td>
+              {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
+              {{ item.line_price | money }}
+              {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div>
+      <p>sub total : {{ cart.total_price | money }}</p>
+      <button type="submit" name="update">Update</button>
+      <button type="submit" name="checkout">Checkout</button>
+    </div>
+  </form> -->
+{% else %}
+
+
+{% endif %}
